@@ -1,0 +1,113 @@
+---
+import Layout from "../layouts/default.astro";
+import { Code } from "astro:components";
+
+const demos = {
+  button: `import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
+export default function BasicButtons() {
+  return (
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
+  );
+}`,
+  checkbox: `import * as React from 'react';
+import Checkbox from '@mui/material/Checkbox';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+export default function Checkboxes() {
+  return (
+    <div>
+      <Checkbox {...label} defaultChecked />
+      <Checkbox {...label} />
+      <Checkbox {...label} disabled />
+      <Checkbox {...label} disabled checked />
+    </div>
+  );
+}`,
+};
+---
+
+<Layout>
+  <div class="example">
+    <Code code={demos.button} lang="jsx" />
+    <button data-example="button">open</button>
+  </div>
+  <div class="example">
+    <Code code={demos.checkbox} lang="jsx" />
+    <button data-example="checkbox">open</button>
+  </div>
+</Layout>
+
+<script src="https://unpkg.com/@stackblitz/sdk@1/bundles/sdk.umd.js"></script>
+<script define:vars={{ demos }} is:inline>
+  document.querySelectorAll("button").forEach((btn) => {
+    btn.onclick = () => {
+      StackBlitzSDK.openProject(
+        {
+          template: "create-react-app",
+          files: {
+            "index.html": `<div id="root"></div>`,
+            "index.tsx": `import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import Demo from './Demo';
+
+ReactDOM.createRoot(document.querySelector("#root")).render(
+      <Demo />
+);`,
+            "Demo.tsx": demos[btn.dataset.example],
+          },
+          dependencies: {
+            react: "*",
+            "@types/react": "*",
+            "@mui/material": "*",
+            "react-dom": "*",
+          },
+        },
+        {
+          openFile: "Demo.tsx",
+        },
+      );
+    };
+  });
+</script>
+
+<style>
+  body {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  pre {
+    width: 640px;
+  }
+  .example {
+    position: relative;
+  }
+  button {
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEwLjc5NyAxNC4xODJIMy42MzVMMTYuNzI4IDBsLTMuNTI1IDkuODE4aDcuMTYyTDcuMjcyIDI0bDMuNTI0LTkuODE4WiIvPjwvc3ZnPg==);
+    background-color: #fff4;
+    background-repeat: no-repeat;
+    background-position: 7px center;
+    background-size: 20px;
+    border-color: #fff2;
+    width: auto;
+    padding: 4px 10px 5px 30px;
+    position: absolute;
+    top: 24px;
+    right: 5px;
+    transition: all 0.2s;
+  }
+  button:hover {
+    background-color: #ccc;
+  }
+  button:active {
+    background-color: #fff;
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/default.astro";
+---
+
+<Layout>
+  <aside>
+    <button id="start">Start</button>
+    <button id="theming">Theming</button>
+    <input id="color" type="color" />
+
+    <section>
+      <output id="output">🙋</output>
+      <p>Test yourself!</p>
+      <p>
+        Set the button's background to <code class="inline-code">#337733</code>
+      </p>
+      <button id="test">check</button>
+    </section>
+
+    <button id="customization">Customization</button>
+
+    <iframe id="iframe"></iframe>
+  </aside>
+  <main id="embed"></main>
+</Layout>
+
+<script src="./scripts.ts"></script>

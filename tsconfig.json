@@ -1,0 +1,6 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "lib": ["ES2015", "DOM"]
+  }
+}

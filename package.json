@@ -1,0 +1,21 @@
+{
+  "name": "demo",
+  "type": "module",
+  "version": "0.0.1",
+  "module": "esnext",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.6.0",
+    "@stackblitz/sdk": "^1.10.0",
+    "@types/css-tree": "^2.3.7",
+    "astro": "^4.8.3",
+    "css-tree": "^2.3.1",
+    "typescript": "^5.4.5"
+  }
+}
